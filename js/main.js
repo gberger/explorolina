@@ -57,38 +57,46 @@ var initializeMap = function() {
       });
     });
 
+    var keysDown = {};
+
     var coordsChange = function(coords) {
       drawPlayer(coords);
       places.forEach(function(place) {
         if(!place.visited && latLngDistance(coords, place) < 0.00020) {
+          [37, 38, 39, 40].forEach(function(i){
+            keysDown[i] = false;
+          })
           alert(place.text);
           place.visited = true;
         }
       });
     }
 
-    $(document).on('keydown', function(e){
-        var diff = 0.00005
-        if (e.keyCode == '37') {
-          // left
-          coords.lng -= diff;
-          coordsChange(coords);
-        } else if (e.keyCode == '38') {
-          // up
-          coords.lat += diff;
-          coordsChange(coords);
-        } else if (e.keyCode == '39') {
-          // right
-          coords.lng += diff;
-          coordsChange(coords);
-        } else if (e.keyCode == '40') {
-          // down
-          coords.lat -= diff;
-          coordsChange(coords);
-        } 
+    $(document).on('keydown', function(e) {
+      keysDown[e.keyCode] = true;
     });
-  }
+    $(document).on('keyup', function(e) {
+      keysDown[e.keyCode] = false;
+    });
+    $(document).on('keydown keyup', function(e){
+      var diff = 0.00005
+      if (keysDown['37']) { // left
+        coords.lng -= diff;
+        coordsChange(coords);
+      } else if (keysDown['39']) { // right
+        coords.lng += diff;
+        coordsChange(coords);
+      } 
+      if (keysDown['38']) { // up
+        coords.lat += diff;
+        coordsChange(coords);
+      } else if (keysDown['40']) { // down
+        coords.lat -= diff;
+        coordsChange(coords);
+      } 
+    });
 
-}
+  };
+};
 
 $(document).on('ready', initializeMap);
