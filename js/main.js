@@ -1,6 +1,8 @@
 var initializeMap = function() {
+  var center = { lat: 35.907970, lng: -79.047899};
+
   var mapOptions = {
-    center: { lat: 35.907970, lng: -79.047899},
+    center: center,
     disableDefaultUI: true,
     draggable: false,
     scrollwheel: false,
@@ -11,6 +13,10 @@ var initializeMap = function() {
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
   var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+  $(window).resize(function() {
+    map.setCenter(center);
+  });
 
   $('.gmnoprint .gm-style-cc').hide();
 
