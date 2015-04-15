@@ -12,6 +12,8 @@ var initializeMap = function() {
   };
   var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
+  $('.gmnoprint .gm-style-cc').hide();
+
   var drawPlayer = function() {
     var player = null;
     return function(coords) {
