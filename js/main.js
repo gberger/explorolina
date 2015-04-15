@@ -89,7 +89,7 @@ var initializeMap = function() {
 
     var coordsChange = function(coords) {
       drawPlayer(coords);
-      if(!place.visited && latLngDistance(coords, place) < 0.00020) {
+      if(place && latLngDistance(coords, place) < 0.00020) {
         [37, 38, 39, 40].forEach(function(i){
           keysDown[i] = false;
         })
