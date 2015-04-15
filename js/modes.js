@@ -2,7 +2,7 @@ var modes = [
   {
     name: "Undergraduate",
     level: 0,
-    startCoords: {lat: 35.900883, lng: -79.044008},
+    startCoords: {lat: 35.901300, lng: -79.044008},
     places: [
       {
         name: "Dean Dome", 

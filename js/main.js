@@ -46,7 +46,7 @@ var initializeMap = function() {
 
   var startGame = function(mode) {
     var coords = mode.startCoords;
-    drawPlayer(mode.coords);
+    drawPlayer(coords);
 
     var places = mode.places;
     places.forEach(function(place) {
