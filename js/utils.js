@@ -4,7 +4,9 @@ var latLngDistance = function(a, b) {
 
 var miscModal = $("#misc-modal");
 
-var showMiscModal = function() {
+var showMiscModal = function(title, body) {
+  miscModal.find(".modal-title").text(title);
+  miscModal.find(".modal-body").text(body);
   miscModal.modal();
 }
 

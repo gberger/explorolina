@@ -90,7 +90,7 @@ var initializeMap = function() {
 
     var activatePlace = function(place) {
       place.visited = true;
-      alert(place.text);
+      showMiscModal(place.name, place.text);
       nextPlace();
     }
 
