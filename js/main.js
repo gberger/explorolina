@@ -50,29 +50,52 @@ var initializeMap = function() {
     var coords = mode.startCoords;
     drawPlayer(coords);
 
+
     var places = mode.places;
-    places.forEach(function(place) {
-      new google.maps.Marker({
-        position: place,
-        map: map,
-        title: place.name
-      });
-    });
+    var placeIndex = -1;
+    var place = places[placeIndex];
+    var marker = null;
+
+    var drawPlace = function(place) {
+      if(marker && marker.setMap) {
+        marker.setMap(null);
+      }
+      if(place) {
+        marker = new google.maps.Marker({
+          position: place,
+          title: place.name,
+          map: map
+        });   
+      } else {
+        marker = null;
+      }
+    };
+
+    var nextPlace = function() {
+      placeIndex++;
+      place = places[placeIndex];
+      drawPlace(place);
+    };
+
+    var activatePlace = function(place) {
+      place.visited = true;
+      alert(place.text);
+      nextPlace();
+    }
+
+    nextPlace();
 
     var keysDown = {};
 
     var coordsChange = function(coords) {
       drawPlayer(coords);
-      places.forEach(function(place) {
-        if(!place.visited && latLngDistance(coords, place) < 0.00020) {
-          [37, 38, 39, 40].forEach(function(i){
-            keysDown[i] = false;
-          })
-          alert(place.text);
-          place.visited = true;
-        }
-      });
-    }
+      if(!place.visited && latLngDistance(coords, place) < 0.00020) {
+        [37, 38, 39, 40].forEach(function(i){
+          keysDown[i] = false;
+        })
+        activatePlace(place);
+      }
+    };
 
     $(document).on('keydown', function(e) {
       keysDown[e.keyCode] = true;
