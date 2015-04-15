@@ -10,7 +10,12 @@ var initializeMap = function() {
     maxZoom: 15,
     minZoom: 15,
     zoom: 15,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    styles: [{
+      featureType: "poi",
+      elementType: "labels",
+      stylers: [ { visibility: "off" } ]
+    }]
   };
   var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
