@@ -91,37 +91,60 @@ var initializeMap = function() {
 
     nextPlace();
 
-    var keysDown = {};
+    var directions = {
+      up: false,
+      down: false,
+      right: false,
+      left: false
+    };
+
+    var keyToDirections = {
+      87: 'up',
+      65: 'left',
+      83: 'down',
+      68: 'right',
+      37: 'left',
+      38: 'up',
+      39: 'right',
+      40: 'down'
+    }
 
     var coordsChange = function(coords) {
       drawPlayer(coords);
       if(place && latLngDistance(coords, place) < 0.00020) {
-        [37, 38, 39, 40].forEach(function(i){
-          keysDown[i] = false;
-        })
+        directions = {
+          up: false,
+          down: false,
+          right: false,
+          left: false
+        };
         activatePlace(place);
       }
     };
 
     $(document).on('keydown', function(e) {
-      keysDown[e.keyCode] = true;
+      if(keyToDirections[e.keyCode]) {
+        directions[keyToDirections[e.keyCode]] = true;
+      }
     });
     $(document).on('keyup', function(e) {
-      keysDown[e.keyCode] = false;
+      if(keyToDirections[e.keyCode]) {
+        directions[keyToDirections[e.keyCode]] = false;
+      }
     });
     $(document).on('keydown keyup', function(e){
       var diff = 0.00005
-      if (keysDown['37']) { // left
+      if (directions.left) { // left
         coords.lng -= diff;
         coordsChange(coords);
-      } else if (keysDown['39']) { // right
+      } else if (directions.right) { // right
         coords.lng += diff;
         coordsChange(coords);
       } 
-      if (keysDown['38']) { // up
+      if (directions.up) { // up
         coords.lat += diff;
         coordsChange(coords);
-      } else if (keysDown['40']) { // down
+      } else if (directions.down) { // down
         coords.lat -= diff;
         coordsChange(coords);
       } 
