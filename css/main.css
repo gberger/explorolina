@@ -57,8 +57,14 @@ textarea {
    ========================================================================== */
 
 
+.modal .modal-body {
+    max-height: 420px;
+    overflow-y: auto;
+}
 
-
+.modal class {
+	max-height: 100%; 
+}
 
 
 
