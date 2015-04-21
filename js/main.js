@@ -56,11 +56,9 @@ var initializeMap = function() {
   })
 
 
-
   var startGame = function(mode) {
     var coords = mode.startCoords;
     drawPlayer(coords);
-
 
     var places = mode.places;
     var placeIndex = -1;
@@ -90,7 +88,8 @@ var initializeMap = function() {
 
     var activatePlace = function(place) {
       place.visited = true;
-      showMiscModal(place.name, place.text);
+      //showMiscModal(place.name, place.text);
+	  showMiscModal(place.name, place.text, place.img, place.button);
       nextPlace();
     }
 
