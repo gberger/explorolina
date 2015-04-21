@@ -4,11 +4,20 @@ var latLngDistance = function(a, b) {
 
 var miscModal = $("#misc-modal");
 
-var showMiscModal = function(title, body) {
+//var showMiscModal = function(title, body) {
+  //miscModal.find(".modal-title").text(title);
+  //miscModal.find(".modal-body").text(body);
+ // miscModal.modal();
+//}
+
+var showMiscModal = function(title, body, img, button) {
   miscModal.find(".modal-title").text(title);
-  miscModal.find(".modal-body").text(body);
+  miscModal.find(".modal-body").html(body);
+  miscModal.find(".modal-img").html(img); 
+  miscModal.find(".button-name").text(button);
   miscModal.modal();
 }
+
 
 var hideMiscModal = function() {
   miscModal.modal('hide');
