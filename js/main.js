@@ -31,7 +31,10 @@ var initializeMap = function() {
       var playerOptions = {
         map: map,
         position: coords,
-        icon: 'img/tarheelicon.png'
+        icon: {
+          url: 'img/tarheelicon.png',
+          anchor: new google.maps.Point(25, 25)
+        }
       }
       var oldPlayer = player;
       player = new google.maps.Marker(playerOptions);
@@ -130,7 +133,7 @@ var initializeMap = function() {
 
     var coordsChange = function(coords) {
       drawPlayer(coords);
-      if(place && latLngDistance(coords, place) < 0.00020) {
+      if(place && latLngDistance(coords, place) < 0.00040) {
         directions = {
           up: false,
           down: false,
