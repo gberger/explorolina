@@ -66,14 +66,21 @@ textarea {
 	max-height: 100%; 
 }
 
+#dialogue-modal .modal-img, 
+#dialogue-modal .modal-body {
+    text-align: center;
+}
 
 
 
+#game-modal iframe {
+    width: 666px;
+    height: 443px;
+}
 
-
-
-
-
+#game-modal .modal-body {
+    min-height: 500px;
+}
 
 
 /* ==========================================================================
