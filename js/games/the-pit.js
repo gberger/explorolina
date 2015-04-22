@@ -3,24 +3,24 @@ enchant();
  
 // 2 - On document load 
 window.onload = function() {
-	// 3 - Starting point
-	var game = new Game(666, 443);
-	// 4 - Preload resourcess
-	game.preload('res/thePit.png','res/avatarsheet.png','res/garybein.png','res/flyer.png','res/finalCountdown.mp3','res/sodo.mp3','res/Hit.mp3','res/toast.mp3');
-	// 5 - Game settings
-	game.fps = 30;
-	game.scale = 1;
-	game.onload = function() {
-		// 6 - Once Game finishes loading
-		
-		var scene = new SceneGame();
+  // 3 - Starting point
+  var game = new Game(666, 443);
+  // 4 - Preload resourcess
+  game.preload('res/thePit.png','res/avatarsheet.png','res/garybein.png','res/flyer.png','res/finalCountdown.mp3','res/sodo.mp3','res/Hit.mp3','res/toast.mp3');
+  // 5 - Game settings
+  game.fps = 30;
+  game.scale = 1;
+  game.onload = function() {
+    // 6 - Once Game finishes loading
+    
+    var scene = new SceneGame();
         game.pushScene(scene);
 
-	}
-	// 7 - Start
-	game.start();
-	window.scrollTo(0, 0);
-	// SceneGame  
+  }
+  // 7 - Start
+  game.start();
+  window.scrollTo(0, 0);
+  // SceneGame  
 var SceneGame = Class.create(Scene, {
      // The main gameplay scene.     
     initialize: function() {
@@ -94,7 +94,7 @@ this.bgm.play();
 
 update: function(evt) {
 
-	// Score increase as time passes
+  // Score increase as time passes
 this.scoreTimer += evt.elapsed * 0.001;
 if (this.scoreTimer >= 0.5) {
     this.setScore(this.score + 1);
@@ -117,7 +117,7 @@ for (var i = this.flyerGroup.childNodes.length - 1; i >= 0; i--) {
     var flyer;
     flyer = this.flyerGroup.childNodes[i];
     if (flyer.intersect(this.penguin)){
-    	  this.count+=1;
+        this.count+=1;
           this.meow=0;
     var game = Game.instance;
     game.assets['res/Hit.mp3'].play();
@@ -130,7 +130,7 @@ for (var i = this.flyerGroup.childNodes.length - 1; i >= 0; i--) {
     // Game over
     if(this.count>=3){
     this.bgm.stop();
-	game.replaceScene(new SceneGameOver(this.score));  
+  game.replaceScene(new SceneGameOver(this.score));  
 }      
     break;
 }
@@ -174,7 +174,7 @@ for (var i = this.iceGroup.childNodes.length - 1; i >= 0; i--) {
     var ice;
     ice = this.iceGroup.childNodes[i];
     if (ice.intersect(this.penguin)){
-    	  this.count+=1;
+        this.count+=1;
           this.meow=0;
     var game = Game.instance;
 
@@ -268,24 +268,24 @@ var Ice = Class.create(Sprite, {
         this.addEventListener(Event.ENTER_FRAME, this.update);
     },
     setLane: function(lane) {
-	var game, distance;
-	game = Game.instance;        
-	distance = 180;
+  var game, distance;
+  game = Game.instance;        
+  distance = 180;
  
-	this.rotationSpeed = Math.random() * 100 - 50;
+  this.rotationSpeed = Math.random() * 100 - 50;
  
     this.x = game.width/2 - this.width/2 + (lane - 1) * distance;
     this.y = -this.height/2;    
    // this.rotation = Math.floor( Math.random() * 360 );    
 },
 update: function(evt) { 
-	var ySpeed, game;
+  var ySpeed, game;
  
-	game = Game.instance;
+  game = Game.instance;
     ySpeed = 300;
  
-	this.y += ySpeed * evt.elapsed * 0.001;
-	//this.rotation += this.rotationSpeed * evt.elapsed * 0.001;           
+  this.y += ySpeed * evt.elapsed * 0.001;
+  //this.rotation += this.rotationSpeed * evt.elapsed * 0.001;           
     if (this.y > game.height) {
         this.parentNode.removeChild(this);        
     }
@@ -303,24 +303,24 @@ var Flyer = Class.create(Sprite, {
 
     },
     setLane: function(lane) {
-	var game, distance;
-	game = Game.instance;        
-	distance = 180;
+  var game, distance;
+  game = Game.instance;        
+  distance = 180;
  
-	this.rotationSpeed = Math.random() * 100 - 50;
+  this.rotationSpeed = Math.random() * 100 - 50;
  
     this.x = game.width/2 - this.width/2 + (lane - 1) * distance;
     this.y = -this.height;    
     this.rotation = Math.floor( Math.random() * 360 );    
 },
 update: function(evt) { 
-	var ySpeed, game;
+  var ySpeed, game;
  
-	game = Game.instance;
+  game = Game.instance;
     ySpeed = 300;
  
-	this.y += ySpeed * evt.elapsed * 0.001;
-	this.rotation += this.rotationSpeed * evt.elapsed * 0.004;           
+  this.y += ySpeed * evt.elapsed * 0.001;
+  this.rotation += this.rotationSpeed * evt.elapsed * 0.004;           
     if (this.y > game.height) {
         this.parentNode.removeChild(this);        
     }
