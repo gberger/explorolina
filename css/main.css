@@ -76,12 +76,11 @@ textarea {
 #game-modal iframe {
     width: 666px;
     height: 443px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 #game-modal .modal-body {
     min-height: 500px;
+    text-align: center;
 }
 
 

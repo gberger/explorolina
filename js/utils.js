@@ -12,6 +12,7 @@ var dialogueModal = $("#dialogue-modal");
 var showDialogueModal = function(title, body, img, button, callback) {
   dialogueModal.find(".modal-title").text(title);
   dialogueModal.find(".modal-body").html(body);
+  dialogueModal.find(".modal-img img").attr('src', ''); 
   dialogueModal.find(".modal-img img").attr('src', img); 
   dialogueModal.find(".action-btn").text(button);
 
