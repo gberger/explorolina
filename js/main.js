@@ -171,6 +171,20 @@ var initializeMap = function() {
       }
     });
 
+
+    // GPS
+    if (isMobile.any) {
+      $.geolocation.watch({
+        settings: {
+          enableHighAccuracy: true
+        },
+        success: function(position) {
+          coords = {lat: position.coords.latitude, lng: position.coords.longitude};
+          coordsChange(coords);
+        }
+      })
+    }
+
   };
 };
 
