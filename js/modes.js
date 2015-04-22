@@ -19,6 +19,9 @@ var modes = [
             body: "<b>Michael Jordan</b>: Hey, I'm Michael Jordan, but you already knew that. To move on to the next stage of this game, you're gonna have to do something that no one has done before: outshoot me. You'll have to make at least 10 free throws in 30 seconds. Oh, and if you were wondering, I averaged 83% from the line. Good luck with this one. <b> Shoot balls by XXXX Ready, set, GO",
             img: "img/jordan.png",
             button: "play",
+          }, {
+            type: "game",
+            src: "games/the-pit.html"
           }
         ]
       }, {

@@ -92,17 +92,22 @@ var initializeMap = function() {
 
       function aa (){
         i++;
-        console.log(i);
         if (i < place.frames.length) {
           frame = place.frames[i];
-          showMiscModal(frame.name, frame.body, frame.img, frame.button, aa);
-          return false;
+
+          if(frame.type == "dialogue") {
+            showDialogueModal(place.name, frame.body, frame.img, frame.button, aa);
+            return false;            
+          } else if (frame.type == "game") {
+            hideDialogueModal();
+            showGameModal(place.name, frame.src, nextPlace);
+          }
         } else {
           nextPlace();
         }
       }
 
-      showMiscModal(frame.name, frame.body, frame.img, frame.button, aa);
+      showDialogueModal(place.name, frame.body, frame.img, frame.button, aa);
     }
 
     nextPlace();
