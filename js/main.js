@@ -30,16 +30,11 @@ var initializeMap = function() {
     return function(coords) {
       var playerOptions = {
         map: map,
-        center: coords,
-        strokeColor: '#56A0D3',
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: '#56A0D3',
-        fillOpacity: 0.8,
-        radius: 25
+        position: coords,
+        icon: 'img/tarheelicon.png'
       }
       var oldPlayer = player;
-      player = new google.maps.Circle(playerOptions);
+      player = new google.maps.Marker(playerOptions);
       if(oldPlayer && oldPlayer.setMap){
         oldPlayer.setMap(null);
       }
@@ -49,7 +44,7 @@ var initializeMap = function() {
 
 
 
-  $("#start-menu").modal();
+  $("#start-menu").modal(modalOptions);
   $("#btn-undergrad").on('click', function() {
     $("#start-menu").modal('hide');
     startGame(modes[0]);
@@ -63,20 +58,21 @@ var initializeMap = function() {
     var places = mode.places;
     var placeIndex = -1;
     var place = places[placeIndex];
-    var marker = null;
+    var placeMarker = null;
+    var inModal = false;
 
     var drawPlace = function(place) {
-      if(marker && marker.setMap) {
-        marker.setMap(null);
+      if(placeMarker && placeMarker.setMap) {
+        placeMarker.setMap(null);
       }
       if(place) {
-        marker = new google.maps.Marker({
+        placeMarker = new google.maps.Marker({
           position: place,
           title: place.name,
           map: map
         });
       } else {
-        marker = null;
+        placeMarker = null;
       }
     };
 
@@ -84,11 +80,13 @@ var initializeMap = function() {
       placeIndex++;
       place = places[placeIndex];
       drawPlace(place);
+      inModal = false;
     };
 
     var activatePlace = function(place) {
       var frame = place.frames[0];
       var i = 0;
+      inModal = true;
 
       function aa (){
         i++;
@@ -97,7 +95,7 @@ var initializeMap = function() {
 
           if(frame.type == "dialogue") {
             showDialogueModal(place.name, frame.body, frame.img, frame.button, aa);
-            return false;            
+            return false;
           } else if (frame.type == "game") {
             hideDialogueModal();
             showGameModal(place.name, frame.src, nextPlace);
@@ -155,19 +153,21 @@ var initializeMap = function() {
     });
     $(document).on('keydown keyup', function(e){
       var diff = 0.00005
-      if (directions.left) { // left
-        coords.lng -= diff;
-        coordsChange(coords);
-      } else if (directions.right) { // right
-        coords.lng += diff;
-        coordsChange(coords);
-      }
-      if (directions.up) { // up
-        coords.lat += diff;
-        coordsChange(coords);
-      } else if (directions.down) { // down
-        coords.lat -= diff;
-        coordsChange(coords);
+      if(!inModal) {
+        if (directions.left) { // left
+          coords.lng -= diff;
+          coordsChange(coords);
+        } else if (directions.right) { // right
+          coords.lng += diff;
+          coordsChange(coords);
+        }
+        if (directions.up) { // up
+          coords.lat += diff;
+          coordsChange(coords);
+        } else if (directions.down) { // down
+          coords.lat -= diff;
+          coordsChange(coords);
+        }
       }
     });
 

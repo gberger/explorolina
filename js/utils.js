@@ -2,6 +2,11 @@ var latLngDistance = function(a, b) {
   return Math.sqrt( Math.pow(a.lat - b.lat, 2) + Math.pow(a.lng - b.lng, 2) );
 }
 
+var modalOptions = {
+  keyboard: false,    // not close on esc
+  backdrop: 'static'  // not close on click outside
+}
+
 var dialogueModal = $("#dialogue-modal");
 
 var showDialogueModal = function(title, body, img, button, callback) {
@@ -14,7 +19,7 @@ var showDialogueModal = function(title, body, img, button, callback) {
     dialogueModal.find(".action-btn").one('click', callback);
   }
 
-  dialogueModal.modal();
+  dialogueModal.modal(modalOptions);
 }
 
 var hideDialogueModal = function() {
@@ -30,5 +35,5 @@ var showGameModal = function(title, src, callback) {
   gameModal.find(".action-btn").one('click', callback).one('click', function() {
     gameModal.find('iframe').attr('src', '');
   })
-  gameModal.modal();
+  gameModal.modal(modalOptions);
 };
