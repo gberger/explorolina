@@ -10,11 +10,16 @@ var miscModal = $("#misc-modal");
  // miscModal.modal();
 //}
 
-var showMiscModal = function(title, body, img, button) {
+var showMiscModal = function(title, body, img, button, callback) {
   miscModal.find(".modal-title").text(title);
   miscModal.find(".modal-body").html(body);
-  miscModal.find(".modal-img").html(img); 
-  miscModal.find(".button-name").text(button);
+  miscModal.find(".modal-img img").attr('src', img); 
+  miscModal.find(".action-btn").text(button);
+
+  if(callback) {
+    miscModal.find(".action-btn").one('click', callback);
+  }
+
   miscModal.modal();
 }
 

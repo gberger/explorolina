@@ -66,8 +66,10 @@ textarea {
 	max-height: 100%; 
 }
 
-
-
+#misc-modal .modal-img, 
+#misc-modal .modal-body {
+    text-align: center;
+}
 
 
 

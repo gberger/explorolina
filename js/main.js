@@ -41,7 +41,7 @@ var initializeMap = function() {
       var oldPlayer = player;
       player = new google.maps.Circle(playerOptions);
       if(oldPlayer && oldPlayer.setMap){
-        oldPlayer.setMap(null);  
+        oldPlayer.setMap(null);
       }
       return player;
     }
@@ -74,7 +74,7 @@ var initializeMap = function() {
           position: place,
           title: place.name,
           map: map
-        });   
+        });
       } else {
         marker = null;
       }
@@ -87,10 +87,22 @@ var initializeMap = function() {
     };
 
     var activatePlace = function(place) {
-      place.visited = true;
-      //showMiscModal(place.name, place.text);
-	  showMiscModal(place.name, place.text, place.img, place.button);
-      nextPlace();
+      var frame = place.frames[0];
+      var i = 0;
+
+      function aa (){
+        i++;
+        console.log(i);
+        if (i < place.frames.length) {
+          frame = place.frames[i];
+          showMiscModal(frame.name, frame.body, frame.img, frame.button, aa);
+          return false;
+        } else {
+          nextPlace();
+        }
+      }
+
+      showMiscModal(frame.name, frame.body, frame.img, frame.button, aa);
     }
 
     nextPlace();
@@ -144,14 +156,14 @@ var initializeMap = function() {
       } else if (directions.right) { // right
         coords.lng += diff;
         coordsChange(coords);
-      } 
+      }
       if (directions.up) { // up
         coords.lat += diff;
         coordsChange(coords);
       } else if (directions.down) { // down
         coords.lat -= diff;
         coordsChange(coords);
-      } 
+      }
     });
 
   };
