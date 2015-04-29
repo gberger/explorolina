@@ -34,6 +34,7 @@ var createjs = createjs || {};
 
     var level = game.currentLevel;
 
+    this.createBG();
     this.createObstacles(level);
     this.createHoop(level);
 
@@ -44,6 +45,11 @@ var createjs = createjs || {};
     // the first ball
     game.spawnBall();
   };
+
+  physics.createBG = function () {
+    var bg = new cjs.Bitmap("./res/dome.jpg");
+    game.stage.addChildAt(bg, 0);
+  }
 
   physics.clearWorld = function() {
     var body = this.world.GetBodyList();
