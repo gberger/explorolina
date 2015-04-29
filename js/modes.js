@@ -77,7 +77,7 @@ var modes = [
           }
            {
             type: "game",
-            src: "games/the-pit.html"
+            src: "games/the-pit.html",
           }
         ]
       }, {
