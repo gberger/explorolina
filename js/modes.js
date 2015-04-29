@@ -57,10 +57,7 @@ var modes = [
             img: "img/gio.png",
             button: "run",
           }
-          {
-            type: "game",
-            src: "games/the-pit.html"
-          }
+
         ]
       }, {
         name: "The Pit",
@@ -77,6 +74,10 @@ var modes = [
             body: "<b>Greenpeace Activisit</b>: Oh man, I’m so sorry you had to go through that! That’s Gary Birdsong, we call him the pit preacher here. He gets a little, hm, riled up about his cause sometimes. Which, you know, I can totallyyyy understand. Because I get so riled up about my cause too. You kinda look like you would care about it, actually! I bet you like whales! And want to save them! Here, let me just give you one of these fliers! <br><b> Oh no! You’ve taken your first flier in the pit. You’re now an easy target. Dodge the student groups bombarding you with fliers, quick! Tap or click to dodge oncoming flyers and the stray Gary. If you get hit by 3 fliers you will succumb to a pointless cause! Two hits from Gary sucks you straight into hell!",
             img: "img/greenpeace.png",
             button: "play",
+          }
+           {
+            type: "game",
+            src: "games/the-pit.html"
           }
         ]
       }, {
