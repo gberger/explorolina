@@ -56,6 +56,9 @@ var modes = [
             body: "<b>Gio Bernard</b>: Hey, like Mr. Justice was saying, this is a very historic stadium and I am glad to have played here. So, lets get to it. Before I can tell you where you are going next, you need to beat me in a 40 yard dash. You ready for it?<br><b> Run by XXXX",
             img: "img/gio.png",
             button: "run",
+          }, {
+            type: "game",
+            src: "games/kenan.html"
           }
         ]
       }, {
@@ -109,6 +112,9 @@ var modes = [
             body: "<b>Woodard</b>: Hi! My name is John Woodard and this is my lovely family! You are standing in Sutton's Drug Store. Now, these days it's a drug store in name only. We actually closed our pharmacy just the other year, when CVS bought it out from us. But I'm okay with that. It's nice to be able to focus on serving good food and having a good time with my regulars, rather than worrying about dealing with insurance companies all the time. I've been working here since 1977, but the store actually opened all the way back in 1923, when Mr. Sutton had a full toy store downstairs, a cosmetics counter in the back, and, of course, this wonderful food bar. Nowadays we're still popular, but we have some new attractions. We just opened up a late night food truck that sits over by Pantana Bob's sports bar! You also may notice all the photos on the walls. This trend started in the 80s, when we started putting up photos of some famous ball players enjoying Sutton's. All of a sudden, everyone wanted to join the wall, and now this is what we have! <br><b>Picture matching! Match the famous photos from Sutton's walls with the names of their subjects. Drag and drop names onto the correct pictures to match them!",
             img: "img/suttons.png",
             button: "play",
+          }, {
+            type: "game",
+            src: "games/suttons.html"
           }
         ]
       }, {
