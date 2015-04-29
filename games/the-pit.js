@@ -5,6 +5,7 @@ window.onload = function() {
   game.preload('res/thePit.png','res/avatarsheet.png','res/garybein.png','res/flyer.png','res/finalCountdown.mp3','res/sodo.mp3','res/Hit.mp3','res/toast.mp3');
   game.fps = 30;
   game.scale = 1;
+  //this. counter=0;
   game.onload = function() {
     var scene = new SceneGame();
     game.pushScene(scene);
@@ -74,6 +75,11 @@ window.onload = function() {
     this.setScore(this.score + 1);
     this.scoreTimer -= 0.5;
   }
+  if (this.score >=50)
+  {
+
+    window.parent.postMessage("win","*");
+  }
     // Check if it's time to create a new set of obstacles
     if(this.score<20)
     {
@@ -104,7 +110,8 @@ window.onload = function() {
     // Game over
     if(this.count>=3){
       this.bgm.stop();
-      game.replaceScene(new SceneGameOver(this.score));
+       game.replaceScene(new SceneGameOver(this.score));
+
     }
     break;
   }
@@ -155,8 +162,11 @@ if (this.count>=1 && this.meow==0) {
         this.iceGroup.removeChild(ice);
         if(this.count>=3){
           this.bgm.stop();
+   
           game.replaceScene(new SceneGameOver(this.score));
           game.assets['res/sodo.mp3'].play();
+          
+        
     //this.penguin.updateAnimation2();
   }
   else{
@@ -327,8 +337,10 @@ this.addChild(scoreLabel);
 this.addEventListener(Event.TOUCH_START, this.touchToRestart);
 },
 touchToRestart: function(evt) {
+
   var game = Game.instance;
   game.replaceScene(new SceneGame());
+ 
 }
 });
 

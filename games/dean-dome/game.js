@@ -32,38 +32,33 @@ var images = images||{};
 
     var levelSelection = new lib.LevelSelection();
     game.stage.addChild(levelSelection);
-    levelSelection.levels.stop();
 
-    levelSelection.rightButton.on('click', function(){
-      var next = levelSelection.levels.currentFrame + 1;
-      levelSelection.levels.gotoAndStop(next);
-    });
-    levelSelection.leftButton.on('click', function(){
-      var prev = levelSelection.levels.currentFrame - 1;
-      levelSelection.levels.gotoAndStop(prev);
-    });
-
-    var isPlaying = false;
+    game.isPlaying = false;
     levelSelection.playButton.on('click', function() {
       levelSelection.parent.removeChild(levelSelection);
-
       // game.physics.showDebugDraw();
-
       game.score = 0;
-
-      game.currentLevel = game.levels[levelSelection.levels.currentFrame];
-
+      game.timeLeft = 30;
+      game.start = new Date();
+      game.currentLevel = game.levels[0];
       game.physics.createLevel();
-
       game.view.showScoreBoard();
-
-      isPlaying = true;
+      game.view.showClock();
+      game.isPlaying = true;
     });
+    
 
+    game.mouseBefore = false;
     game.tickWhenDown = 0;
     game.tickWhenUp = 0;
     game.stage.on('stagemousedown', function(e){
-      if (!isPlaying) { return; }
+      if (!game.isPlaying) { return; }
+      if (!game.physics.ball) { 
+        game.mouseBefore = true;
+        return; 
+      }
+      game.mouseBefore = false;
+
       var position = game.physics.ballPosition();
       game.view.showPowerIndicator(position.x, position.y);
 
@@ -74,12 +69,16 @@ var images = images||{};
       game.view.updatePowerBar(0);
     });
     game.stage.on('stagemousemove', function(e){
-      if (!isPlaying) { return; }
+      if (!game.isPlaying) { return; }
+      if (!game.physics.ball) { return; }
+
       var rotation = game.physics.launchAngle(e.stageX, e.stageY);
       game.view.rotatePowerIndicator(rotation* 180 / Math.PI);
     });
     game.stage.on('stagemouseup', function(e){
-      if (!isPlaying) { return; }
+      if (!game.isPlaying) { return; }
+      if (!game.physics.ball || game.mouseBefore) { return; }
+
       game.view.hidePowerIndicator();
       game.tickWhenUp = cjs.Ticker.getTicks();
       ticksDiff = game.tickWhenUp - game.tickWhenDown;
@@ -109,7 +108,31 @@ var images = images||{};
     // launch power preview
     var ticksDiff = cjs.Ticker.getTicks() - game.tickWhenDown;
     game.view.updatePowerBar(ticksDiff);
+    
+    if(game.isPlaying) {
+      // update clock
+      var now = new Date();
+      game.timeLeft = Math.max(0, 30 - (now - game.start)/1000);
+      game.view.updateClock();
+
+      // win/lose
+      if(game.timeLeft > 0 && game.score >= 10) {
+        game.goToWin();
+      } else if(game.timeLeft <= 0) {
+        game.goToLose();
+      }
+    }  
   };
+
+  game.goToWin = function() {
+    game.isPlaying = false;
+    parent.postMessage("win","*");
+  }
+
+  game.goToLose = function() {
+    game.isPlaying = false;
+    parent.postMessage("lose","*");
+  }
 
   game.load();
 

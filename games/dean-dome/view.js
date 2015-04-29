@@ -14,6 +14,16 @@ var createjs = createjs || {};
     this.scoreBoard.textField.text = game.score + '';
   };
 
+  game.view.showClock = function(){
+    this.clock = new lib.Clock();
+    this.clock.x = 80;
+    this.clock.y = 10;
+    game.stage.addChild(this.clock);
+  };
+  game.view.updateClock = function() {
+    this.clock.textField.text = game.timeLeft.toFixed(1);
+  }
+
   game.view.addSpriteToBody = function(body, spriteName, index) {
     var sprite = new lib[spriteName]();
     sprite.x = -99;
