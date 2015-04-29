@@ -60,7 +60,7 @@ var SceneGame = Class.create(Scene, {
 		this.addEventListener(Event.LEFT_BUTTON_UP, this.handleKeyControl);
 		// this.addEventListener(Event.ENTER_FRAME,this.update);
 
-		this.scoreTimer = 25;
+		this.scoreTimer = 15;
 		this.elapsedTime = 0;
 
 		//Background Music
@@ -113,7 +113,7 @@ var SceneGame = Class.create(Scene, {
 	update: function(evt) {
         // Score increase as time pass
         //var elapsedTime;
-        this.elapsedTime += evt.elapsed * 0.01;
+        this.elapsedTime += evt.elapsed * 0.001;
         if(this.elapsedTime >= 0.01){
             this.setScore((this.scoreTimer-0.01).toFixed(2));
             if(this.scoreTimer == 0.0){
