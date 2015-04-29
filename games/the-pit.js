@@ -75,7 +75,7 @@ window.onload = function() {
     this.setScore(this.score + 1);
     this.scoreTimer -= 0.5;
   }
-  if (this.score >=100)
+  if (this.score >=50)
   {
 
     window.parent.postMessage("win","*");
