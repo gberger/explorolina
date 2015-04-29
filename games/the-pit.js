@@ -156,7 +156,7 @@ if (this.count>=1 && this.meow==0) {
         if(this.count>=3){
           this.bgm.stop();
           game.replaceScene(new SceneGameOver(this.score));
-          game.assets['res/genitals.mp3'].play();
+          game.assets['res/sodo.mp3'].play();
     //this.penguin.updateAnimation2();
   }
   else{
