@@ -46,3 +46,5 @@ var winGame = function() {
 var refreshGame = function() {
   gameModal.find('iframe').attr('src', gameModal.find('iframe').attr('src'));
 }
+
+gameModal.find('.restart-btn').on('click', refreshGame);
