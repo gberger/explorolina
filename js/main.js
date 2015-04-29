@@ -146,7 +146,7 @@ var initializeMap = function() {
 
     var coordsChange = function(coords) {
       drawPlayer(coords);
-      if(place && latLngDistance(coords, place) < 0.00040) {
+      if(place && latLngDistance(coords, place) < 0.00066) {
         directions = {
           up: false,
           down: false,
