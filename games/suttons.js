@@ -64,7 +64,6 @@ var getRadioValue = function(){
             +"'submit' onClick = 'loadContent()'> Next Question</button>";
         document.getElementById("score").innerHTML = "Score: "+score;
         if(score >= 4){
-            alert("You won!!");
             parent.postMessage("win","*");
         }
     }
