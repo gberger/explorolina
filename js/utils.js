@@ -33,8 +33,16 @@ var gameModal = $("#game-modal");
 var showGameModal = function(title, src, callback) {
   gameModal.find(".modal-title").text(title);
   gameModal.find('iframe').attr('src', src);
-  gameModal.find(".action-btn").one('click', callback).one('click', function() {
+  gameModal.find(".action-btn").removeClass('btn-success').attr('disabled', 'disabled').one('click', callback).one('click', function() {
     gameModal.find('iframe').attr('src', '');
   })
   gameModal.modal(modalOptions);
 };
+
+var winGame = function() {
+  gameModal.find('.action-btn').removeAttr("disabled").addClass('btn-success');
+}
+
+var refreshGame = function() {
+  gameModal.find('iframe').attr('src', gameModal.find('iframe').attr('src'));
+}

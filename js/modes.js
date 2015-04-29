@@ -21,7 +21,7 @@ var modes = [
             button: "play",
           }, {
             type: "game",
-            src: "games/the-pit.html"
+            src: "games/dean-dome.html"
           }
         ]
       }, {

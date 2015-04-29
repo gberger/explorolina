@@ -20,3 +20,15 @@
         }
     }
 }());
+
+
+// iframe message
+var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+var eventer = window[eventMethod];
+var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+
+eventer(messageEvent,function(e) {
+  var key = e.message ? "message" : "data";
+  var data = e[key];
+  $(window).trigger('game-event', e.data);
+},false);

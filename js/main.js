@@ -102,6 +102,19 @@ var initializeMap = function() {
           } else if (frame.type == "game") {
             hideDialogueModal();
             showGameModal(place.name, frame.src, nextPlace);
+
+            function wl (e, winOrLose) {
+              if(winOrLose == 'win') {
+                winGame();
+              } else if(winOrLose == 'lose') {
+                refreshGame();
+                $(window).one('game-event', wl);
+              } else {
+                debugger
+              }
+            }
+
+            $(window).one('game-event', wl)
           }
         } else {
           nextPlace();
