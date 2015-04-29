@@ -57,6 +57,10 @@ var modes = [
             img: "img/gio.png",
             button: "run",
           }
+          {
+            type: "game",
+            src: "games/the-pit.html"
+          }
         ]
       }, {
         name: "The Pit",
