@@ -8,14 +8,14 @@ var game = this.game || (this.game={});
     'slow ball': {
       className: 'SlowBall',
       radius: 13,
-      density: 0.6,
+      density: 0.65,
       friction: 0.8,
-      restitution: 0.1
+      restitution: 0.35
     }
   };
   game.levels = [
     {
-      hoopPosition: {x:50, y:200},
+      hoopPosition: {x:50, y:170},
       ballName: 'slow ball',
       ballPosition: {x:350, y:250},
       ballRandomRange: {x:100, y:100},
