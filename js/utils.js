@@ -48,3 +48,5 @@ var refreshGame = function() {
 }
 
 gameModal.find('.restart-btn').on('click', refreshGame);
+
+cheet('w i n g a m e', winGame);
