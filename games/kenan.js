@@ -90,14 +90,20 @@ var SceneGame = Class.create(Scene, {
     this.addChild(this.scoreLabel)
 
     this.addEventListener(Event.TOUCH_END, this.moveLeft);
-    this.addEventListener(Event.LEFT_BUTTON_UP, this.moveLeft);
+    this.addEventListener(Event.LEFT_BUTTON_UP, this.handleKeyControl);
     this.addEventListener(Event.ENTER_FRAME, this.update);
 
+  },
+
+  handleKeyControl: function(evt) {
+    this.moveLeft();
   },
 
   moveLeft: function(evt) {
     this.ram.x -= RAM_STEPS;
   },
+
+
 
   update: function(evt) {
     this.timeLeft -= 1/FPS;
