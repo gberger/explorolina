@@ -1,13 +1,48 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <script src="suttons.js"></script>    
+  <meta charset="UTF-8">
+  <title>Sutton's Drugstore</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="style/normalize.css"/>
+  <link rel="stylesheet" href="style/buttons.min.css"/>
+  <link rel="stylesheet" href="style/suttons.css"/>
+  <link rel="stylesheet" href="style/font-awesome.min.css"/>
 </head>
 <body>
-    <div id="score" align="right"></div>
-    <div id="myDiv1" align="center"><img id="pic" src="" border="0" alt="image"></div> 
-    <div id="myDiv2" align="center"></div>
-    <div id="myDiv3" align="center"></div>
-    <div id="myDiv4" align="center"></div>
+
+<div class="container">
+  <div class="title clearfix">
+    <h1>Who is this famous Carolina athlete?</h1>
+  </div>
+
+  <div class="game" style="display: none;">
+    <ul class="choices">
+      <li class="choice"><button id="choice-1" class="pure-button"></button></li>
+      <li class="choice"><button id="choice-2" class="pure-button"></button></li>
+      <li class="choice"><button id="choice-3" class="pure-button"></button></li>
+      <li class="choice"><button id="choice-4" class="pure-button"></button></li>
+    </ul>
+
+    <img id="athlete-img" src="res/blank.gif"/>
+    <img id="img-loader" src="res/blank.gif" style="display: none;"/>
+    <p class="score"><span class="correct">0</span>/<span class="so-far">0</span></p>
+  </div>
+
+  <div class="fin" style="display: none;">
+
+    <p>The end!</p>
+    <p>You scored <span class="correct"></span>/<span class="total"></span>.</p>
+
+    <div class="again" style="display: none;">
+      <p>You need to score at least 3 to advance to the next location.</p>
+      <p><button class="pure-button restart-button">Play again</button></p>  
+    </div>
+  </div>
+</div>
+
+<script src="../js/vendor/jquery-1.11.2.min.js"></script>
+<script src="suttons.js"></script>
+
 </body>
 </html>

@@ -1,84 +1,126 @@
-var questions = new Array();
-questions[0] = new Image();
-questions[0].src = './res/charlie.jpg';
-questions[1] = new Image();
-questions[1].src = "./res/lawrence.jpg";
-questions[2] = new Image();
-questions[2].src = "./res/lennie.jpg";
-questions[3] = new Image();
-questions[3].src = "./res/worthy.jpg";
-questions[4] = new Image();
-questions[4].src = "./res/mia.jpg";
+var questions = [
+  {
+    image: './res/charlie.jpg',
+    alternatives: ['Jim Tatum', 'Bill Dooley', 'Charlie Justice', 'Don McCauley'],
+    correct: 'Charlie Justice'
+  },  {
+    image: "./res/lawrence.jpg",
+    alternatives: ['Amos Lawrence', 'Lawrence Taylor', 'George Barclay', 'William Fuller'],
+    correct: 'Lawrence Taylor'
+  },  {
+    image: "./res/lennie.jpg",
+    alternatives: ['Charles Scott', 'Tommy LaGarde', 'Larry Brown', 'Lennie Rosenbluth'],
+    correct: 'Lennie Rosenbluth'
+  },  {
+    image: "./res/worthy.jpg",
+    alternatives: ['Sam Perkins', 'James Worthy', 'Walter Davis', 'Buzz Peterson'],
+    correct: 'James Worthy'
+  },  {
+    image: "./res/mia.jpg",
+    alternatives: ['Mia Hamm', 'Shannon Higgins', 'Yael Averbuch', 'Kristine Lilly'],
+    correct: 'Mia Hamm'
+  }
+]
 
-
-
-var choices = new Array();
-choices[0] = ['Jim Tatum', 'Bill Dooley', 'Charlie Justice', 'Don McCauley'],
-choices[1] = ['Amos Lawrence', 'Lawrence Taylor', 'George Barclay', 'William Fuller'],
-choices[2] = ['Charles Scott', 'Tommy LaGarde', 'Larry Brown', 'Lennie Rosenbluth'],
-choices[3] = ['Sam Perkins', 'James Worthy', 'Walter Davis', 'Buzz Peterson'],
-choices[4] = ['Mia Hamm', 'Shannon Higgins', 'Yael Averbuch', 'Kristine Lilly'];
-
-
-var answers = new Array();
-answers[0] = ['Charlie Justice'],
-answers[1] = ['Lawrence Taylor'],
-answers[2] = ['Lennie Rosenbluth'],
-answers[3] = ['James Worthy'],
-answers[4] = ['Mia Hamm'];
-
-
-
-var score = 0;
-i= 0;
-
-var listQuestion = function(){  
-    if(i<questions.length){
-        document.getElementById("pic").src = questions[i].src;
-        var choicesOutput=[];//new Array()
-        for (var k=0; k<choices[i].length; k++){
-            choicesOutput.push(
-                '<p><input type = "radio" value="'+choices[i][k]+'" name ='
-                +' "questionchoice">'+choices[i][k]+'</p>');
-        }
-        document.getElementById("myDiv2").innerHTML =choicesOutput.join("");
-        document.getElementById("myDiv3").innerHTML = 
-            '<p><button onClick = "getRadioValue()">Check</button></p> <br>';
-    }
+var shuffle = function(o){
+  for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+  return o;
 };
-var getRadioValue = function(){
-    var value = '';
-    for (var h = 0; 
-        h < document.getElementsByName('questionchoice').length; h++){
-        if (document.getElementsByName('questionchoice')[h]
-            .checked==true){
-            value = document.getElementsByName('questionchoice')[h].value;
-            // console.log(value);
-            score++;
-            console.log("Score "+score);
-        }
+
+var DELAY = 2 * 1000;
+
+var $correct = $('.correct');
+var $soFar = $('.so-far');
+var $total = $('.total');
+var $buttons = $('.choice button');
+var $choice1 = $('#choice-1');
+var $choice2 = $('#choice-2');
+var $choice3 = $('#choice-3');
+var $choice4 = $('#choice-4');
+var $atheleteImg = $('#athlete-img');
+var $imgLoader = $('#img-loader');
+var $restartButton = $('.restart-button');
+var $game = $('.game');
+var $fin = $('.fin');
+var $again = $('.again');
+
+
+var start = function() {
+  $fin.hide();
+  $game.show();
+
+  shuffle(questions);
+  var currentQuestion = -1;
+  var correct = 0;
+  var total = questions.length;
+
+  $total.text(total);
+
+  var nextQuestion = function() {
+    currentQuestion += 1;
+
+    var question = questions[currentQuestion];
+    shuffle(question.alternatives);
+
+    if(questions[currentQuestion+1]){ 
+      $imgLoader.attr('src', questions[currentQuestion+1].image)
     }
-    if (value== answers[i]){
-        document.getElementById("myDiv4").innerHTML =
-            "That is correct. </br><button input type = "
-            +"'submit' onClick = 'loadContent()'> Next Question</button>";
-        document.getElementById("score").innerHTML = "Score: "+score;
-        if(score >= 4){
-            parent.postMessage("win","*");
-        }
+
+    $buttons.removeClass("guess-correct guess-wrong").attr('disabled', false);
+    $choice1.text(question.alternatives[0]).data('athlete-name', question.alternatives[0]);
+    $choice2.text(question.alternatives[1]).data('athlete-name', question.alternatives[1]);
+    $choice3.text(question.alternatives[2]).data('athlete-name', question.alternatives[2]);
+    $choice4.text(question.alternatives[3]).data('athlete-name', question.alternatives[3]);
+    $atheleteImg.attr('src', question.image);
+  }
+
+  $buttons.on('click', function(e) {
+    var $guessElement = $(e.target);
+    var guess = $guessElement.data('athlete-name');
+    var actual = questions[currentQuestion].correct;
+    var question = questions[currentQuestion];
+    var $actualElement = $('#choice-' + (question.alternatives.indexOf(actual)+1));
+
+    $buttons.attr('disabled', true);
+
+    if(guess == actual) {
+      correct += 1;
+      $guessElement.addClass("guess-correct");
+    } else {
+      $actualElement.addClass("guess-correct");
+      $guessElement.addClass("guess-wrong");
     }
-    else {
-        document.getElementById("myDiv4").innerHTML ="That is incorrect. "
-           +"</br><button input type = 'submit' onClick = 'loadContent()'> N"
-           +"ext Question</button>"; 
+
+    $correct.text(correct);
+    $soFar.text(currentQuestion+1);
+
+    if(currentQuestion+1 < total) {
+      setTimeout(nextQuestion, DELAY);
+    } else {
+      setTimeout(function(){end(correct)}, DELAY);
     }
-    i++;
-};
-var whatIsScore = function(){
-    return score; 
-};
-function loadContent(){
-    document.getElementById("myDiv4").innerHTML="";
-    listQuestion();
+
+  });
+
+  nextQuestion();
 }
-window.onload = listQuestion;
+
+var end = function(correct) {
+  $game.hide();
+  $fin.show();
+  if(correct >= 3) {
+    parent.postMessage('win', '*');
+  } else {
+    $again.show();
+  }
+}
+
+var restart = function() {
+  parent.postMessage('lose', '*');
+  start();
+}
+
+$restartButton.on('click', restart);
+
+start();
+

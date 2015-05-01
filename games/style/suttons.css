@@ -1,0 +1,72 @@
+body {
+  color: #1A1A1A;
+  font-family: 'Lato', sans-serif;
+}
+
+.container {
+  text-align: center;
+}
+
+@media screen and (min-width:960px) {
+  .container {
+    position: relative;
+    -webkit-transform: none;
+    transform: none;
+    top: auto;
+    left: auto;
+    margin: 0 auto;
+    width: 640px;
+  }
+}
+
+img {
+ max-width: 100%;
+}
+
+.clearfix:after {
+  content: " ";
+  visibility: hidden;
+  display: block;
+  height: 0;
+  clear: both;
+}
+
+.title h1 {
+  text-align: center;
+  font-size: 1.5em;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+  display: inline-block;
+}
+
+.score {
+  font-size: 1.5em;
+}
+
+.correct {
+  color: #27ae60;
+}
+
+.pure-button {
+  margin: 0.2em;
+  font-size: 1em;
+}
+
+.guess-correct {
+  background: rgb(28, 184, 65);
+}
+
+.guess-wrong {
+  background: rgb(202, 60, 60);
+}
+
+.refresh-button {
+  display: block;
+  width: 100%;
+}
