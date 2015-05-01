@@ -97,7 +97,7 @@ var initializeMap = function() {
           frame = place.frames[i];
 
           if(frame.type == "dialogue") {
-            showDialogueModal(place.name, frame.body, frame.img, frame.button, aa);
+            showDialogueModal(place.name, frame.body, frame.img, frame.button, aa, frame.imgSize);
             return false;
           } else if (frame.type == "game") {
             hideDialogueModal();

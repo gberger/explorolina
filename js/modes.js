@@ -57,7 +57,7 @@ var modes = [
             button: "next",
           }, {
             type: "dialogue",
-            body: "<p><b>Gio Bernard</b>: Hey, like Mr. Justice was saying, this is a very historic stadium and I am glad to have played here. So, lets get to it. Before I can tell you where you are going next, you need to beat me in a 40 yard dash. You ready for it?</p>  <p class='game-instructions alert alert-info'> Run until the timer hits zero! Press down to start and then left to run.</p>",
+            body: "<p><b>Gio Bernard</b>: Hey, like Mr. Justice was saying, this is a very historic stadium and I am glad to have played here. So, lets get to it. Before I can tell you where you are going next, you need to beat me in a 40 yard dash. You ready for it?</p>  <p class='game-instructions alert alert-info'> Run until the timer hits zero! Tap the screen to run.</p>",
             img: "img/gio.png",
             button: "run",
           }, {
@@ -135,6 +135,7 @@ var modes = [
             body: "<p><b>Ramses</b>: Congratulations! You have officially earned a bachelor of science in Explorolinology! There’s no game this time, just the sweet satisfaction of knowing you have completed your first step in becoming a true Tar Heel, born, bred, and dead. Go heels!</p>",
             img: "games/res/diploma.jpg",
             button: "COMPLETE",
+            imgSize: 60
           }, {
             type: "complete"
           }

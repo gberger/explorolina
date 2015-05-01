@@ -27,7 +27,7 @@ var SceneStart = Class.create(Scene, {
     Scene.apply(this);
     this.backgroundColor = 'black';
 
-    var label = new Label("Press left or tap the screen to run!<br><br>Make it to the end in " + TIME_TO_RUN.toFixed(0) + " seconds.<br><br>Press any key to start.");
+    var label = new Label("Tap the screen to run!<br><br>Make it to the end in " + TIME_TO_RUN.toFixed(0) + " seconds.<br><br>Press any key to start.");
     label.x = 0;
     label.y = 40;
     label.color = 'white';
