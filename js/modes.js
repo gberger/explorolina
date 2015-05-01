@@ -133,7 +133,7 @@ var modes = [
           {
             type: "dialogue",
             body: "<p><b>Ramses</b>: Congratulations! You have officially earned a bachelor of science in Explorolinology! There’s no game this time, just the sweet satisfaction of knowing you have completed your first step in becoming a true Tar Heel, born, bred, and dead. Go heels!</p>",
-            img: "img/diploma.jpg",
+            img: "games/res/diploma.jpg",
             button: "COMPLETE",
           }, {
             type: "complete"
